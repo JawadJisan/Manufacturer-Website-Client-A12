@@ -16,6 +16,10 @@ const useToken = (user) => {
             .then(res=>res.json())
             .then(data=>{
                 console.log('data from backend jwt token api', data)
+                const accessToken = data.accessToken;
+                localStorage.setItem('accessToken', accessToken);
+                setToken(accessToken);
+                // console.log(accessToken);
             })
         }
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -29,9 +29,6 @@ const Login = () => {
         }
     }
 
-    /* issue token */
-    const [token] = useToken(googleUser);
-    
 
     const { register, formState: { errors }, handleSubmit, reset  } = useForm();
 
@@ -53,16 +50,10 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || '/';
 
-    // const [token] = useToken(user || guser);
 
-    // useEffect(() => {
-    //     if (token) {
-
-    //         // navigate(from, { replace: true });
-    //     }
-    // }, [token])
+  
 
     let signInError;
 
@@ -78,6 +69,23 @@ const Login = () => {
             reset()
         }
     };
+
+
+     /* issue token */
+     const [token] = useToken(googleUser || createUser || user);
+
+     useEffect(() => {
+        if (token) {
+
+            // navigate(from, { replace: true });
+        }
+    }, [token])
+    if(googleUser || gitUser || facebookUser || user || createUser ){
+        navigate(from, {replace: true});
+
+    }
+
+
     if (loading || googleLoading) {
         return <p>...</p>
     }
