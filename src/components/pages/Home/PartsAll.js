@@ -21,6 +21,7 @@ const PartsAll = () => {
                     allParts?.map(part => <PurchaseSingle
                         part={part}
                         key={part._id}
+                        refetch={refetch}
                     >
                     </PurchaseSingle>
                         

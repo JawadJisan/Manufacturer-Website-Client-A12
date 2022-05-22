@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {  FaCartPlus } from "react-icons/fa";
 
 
-const PurchaseSingle = ({ part }) => {
+const PurchaseSingle = ({ part, refetch }) => {
     const { _id,name, image, description, minOrderQuantity,availableQuantity,price } = part;
     console.log(_id);
 
