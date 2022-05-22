@@ -1,0 +1,11 @@
+.detail-title{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20px;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.inve-name{
+    font-size: 55px;
+    color: cornflowerblue;
+}

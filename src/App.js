@@ -7,6 +7,7 @@ import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import RequireAuth from './components/pages/Login/RequireAuth';
 import Purchase from './components/pages/Purchase/Purchase';
+import NotFound from './components/Sheared/NotFound/NotFound';
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
 
        <Route path='/dashboard' element={<Dashboard/>}></Route>
        <Route path='/login' element={<Login/>}></Route>
-       <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route>
+       {/* <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route> */}
+       <Route path='/purchase/:partsId' element={<RequireAuth><Purchase/></RequireAuth> }></Route>
+
+       <Route path='*' element={<NotFound/>}></Route>
      </Routes>
 
     </div>
