@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import React, { useRef, useState } from 'react';
+import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import './Login.css'
 import { FaFacebook,FaGoogle,FaGithub  } from "react-icons/fa";
+import useToken from '../../Hooks/useToken';
 
 
 const Login = () => {
@@ -12,7 +13,25 @@ const Login = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(
+        auth
+      );
 
+      const emailRef = useRef('');
+      const forgotPassword = async () =>{
+        const email = emailRef.current.value;
+        if(email){
+            await sendPasswordResetEmail(email);
+            console.log('Check Your Email')
+        }
+        else{
+            // toast('Please Enter Your Email')
+        }
+    }
+
+    /* issue token */
+    const [token] = useToken(googleUser);
+    
 
     const { register, formState: { errors }, handleSubmit, reset  } = useForm();
 
@@ -95,7 +114,7 @@ const Login = () => {
                         </label>
                         {/* Input Email */}
 
-                        <input type="email" placeholder="Your Email" className="input input-bordered w-full max-w-xs"
+                        <input ref={emailRef} type="email" placeholder="Your Email" className="input input-bordered w-full max-w-xs"
                             {...register("email", {
                                 required: {
                                     value: true,
