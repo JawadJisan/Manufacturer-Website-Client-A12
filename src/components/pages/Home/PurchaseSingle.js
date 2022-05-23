@@ -5,7 +5,7 @@ import {  FaCartPlus } from "react-icons/fa";
 
 const PurchaseSingle = ({ part, refetch }) => {
     const { _id,name, image, description, minOrderQuantity,availableQuantity,price } = part;
-    console.log(_id);
+    // console.log(_id);
 
     const navigate = useNavigate();
     const goToPurchase = id => {
