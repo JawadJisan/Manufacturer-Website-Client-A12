@@ -14,8 +14,8 @@ const OrderRow = ({ order, index, setDeletOrder }) => {
             <td>{name} </td>
             <td>{userEmail} </td>
             <td>
-                <label onClick={() => setDeletOrder(order)} for="delet-confirm-modal" class="btn btn-xs">DELET</label>
-                {/* <button onClick={() => handleDelet(email)} class="btn btn-xs btn-error">Delet</button> */}
+               {!order.paid &&  <label  onClick={() => setDeletOrder(order)} for="delet-confirm-modal"  class="btn btn-xs"> DELET </label>}
+                
             </td>
             <td>
                   {(order?.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs btn-success'>PAY</button> </Link> }
