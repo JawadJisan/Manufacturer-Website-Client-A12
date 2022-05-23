@@ -18,6 +18,7 @@ import AddProduct from '../src/components/pages/Dashboard/Admin Route/AddProduct
 import MakeAdmin from '../src/components/pages/Dashboard/Admin Route/MakeAdmin'
 import ManageOrders from '../src/components/pages/Dashboard/Admin Route/ManageOrders'
 import ManageProducts from '../src/components/pages/Dashboard/Admin Route/ManageProducts'
+import PaymentOrder from './components/pages/Dashboard/User/PaymentOrder';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
     <Route path='add-review' element={<AddReview/>} />
     <Route path='my-orders' element={<MyOrders/>} />
     <Route path='my-profile' element={<MyProfile/>} />
+    <Route path='payment/:id' element={<PaymentOrder/>} />
 
     {/* admin */}
     <Route path='add-product' element={<AddProduct/>} />

@@ -3,17 +3,19 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
-import { userColumns, userRows } from '../User/dataSource'
+import { userColumns, userRows } from './dataSource'
 
 import './MyOrders.scss'
 import { signOut } from 'firebase/auth';
 import ReactSpinner from '../../../Sheared/ReactSpinner';
 import { useQuery } from 'react-query';
+import OrderRow from './OrderRow';
+import DeletConfirmModal from './DeletConfirm';
 
 const MyOrders = () => {
     const [data, setData] = useState(userRows);
-    const [orders, setOrders] = useState([]);
-
+    const [deletOrder, setDeletOrder] = useState(null);
+    const [aa, setAA] = useState([]);
     const [user, loading, error] = useAuthState(auth);
     const userEmail = user?.email;
     const navigate = useNavigate();
@@ -59,47 +61,49 @@ const MyOrders = () => {
         setData(data.filter((item) => item.id !== id));
     };
 
-    const actionColumn = [
-        {
-            field: "action",
-            headerName: "Action",
-            width: 200,
-            renderCell: (params) => {
-                return (
-                    <div className="cellAction">
-                        <Link to="/users/test" style={{ textDecoration: "none" }}>
-                            <div className="viewButton">View</div>
-                        </Link>
-                        <div
-                            className="deleteButton"
-                            onClick={() => handleDelete(params.row.id)}
-                        >
-                            Delete
-                        </div>
-                    </div>
-                );
-            },
-        },
-    ];
+
+  
 
     return (
-        <div className="datatable">
-            <h1>My Orders: {orders?.length} </h1>
-            <h1>My Orders get react query: {services?.length} </h1>
-            <div className="datatableTitle">
-                Add New User
-                <Link to="/users/new" className="link">
-                    Add New
-                </Link>
+        <div>
+            <h2 className='text-3xl text-center'>Manage Doctors: {services.length} </h2>
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>IMAGE</th>
+                            <th>NAME</th>
+                            <th>DESCRIPTION</th>
+                            <th>Action</th>
+                            <th>Payment</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            services.map((order, index) => <OrderRow
+                                key={order._id}
+                                index={index}
+                                order={order}
+                                refetch={refetch}
+                                setDeletOrder={setDeletOrder}
+                            />)
+                        }
+
+                    </tbody>
+                </table>
             </div>
-            <DataGrid
-                className="datagrid"
-                rows={data}
-                columns={userColumns.concat(actionColumn)}
-                pageSize={9}
-                rowsPerPageOptions={[9]}
-                checkboxSelection
-            />
+            {/* {deletOrder && <swalWithBootstrapButtons 
+            setDeletOrder={setDeletOrder}
+            deletOrder={deletOrder}
+            refetch={refetch}
+            />} */}
+            {deletOrder && <DeletConfirmModal 
+            setDeletOrder={setDeletOrder}
+            deletOrder={deletOrder}
+            refetch={refetch}
+            />}
         </div>
     );
 };
