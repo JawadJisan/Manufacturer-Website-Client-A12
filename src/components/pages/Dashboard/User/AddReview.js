@@ -15,7 +15,7 @@ const AddReview = ({ inputs, title }) => {
 
   const onSubmit = async data => {
     const newDoc = {...data, image:imageUrl}
-    fetch('http://localhost:5000/addDoctor',{
+    fetch('http://localhost:5000/addReview',{
                     method: 'POST',
                     headers:{
                         'content-type':'application/json',
@@ -97,7 +97,7 @@ const AddReview = ({ inputs, title }) => {
             <input required type="text" placeholder="role" 
             {...register("role")}/>
             
-            <input required type="text" placeholder="type" 
+            <textarea required type="text" placeholder="type" 
             {...register("type")}/>
             
             <input className="addBtn submitbtn" type="submit" value="Send" />
