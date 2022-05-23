@@ -7,63 +7,51 @@ import { userColumns, userRows } from '../User/dataSource'
 
 import './MyOrders.scss'
 import { signOut } from 'firebase/auth';
+import ReactSpinner from '../../../Sheared/ReactSpinner';
+import { useQuery } from 'react-query';
 
 const MyOrders = () => {
     const [data, setData] = useState(userRows);
     const [orders, setOrders] = useState([]);
 
     const [user, loading, error] = useAuthState(auth);
+    const userEmail = user?.email;
     const navigate = useNavigate();
 
-    // useEffect(()=>{
-    //     if(user){
-    //         fetch(`http://localhost:5000/orders?email=${user?.email}`, {
-    //     method: 'GET',
-    //     headers: {
-    //       'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    //     }
-    //   })
-    //     .then(res => {
-    //       console.log('res', res);
-    //     //   if (res.status === 401 || res.status === 403) {
-    //         // navigate('/');
-    //         // signOut(auth);
-    //         // localStorage.removeItem('accessToken');
-    //     //   }
+    //   useEffect(() => {
+    //     if (user) {
+    //       fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
+    //         method: 'GET',
+    //         headers: {
+    //           'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    //         }
+    //       })
+    //         .then(res => {
+    //           console.log('res', res);
+    //           if (res.status === 401 || res.status === 403) {
+    //             navigate('/');
+    //             // signOut(auth);
+    //             // localStorage.removeItem('accessToken');
+    //           }
 
-    //       return res.json()
-    //     })
-    //     .then(data => {
-    //       console.log(data)
-    //       setOrders(data);
-    //     })
+    //           return res.json()
+    //         })
+    //         .then(data => {
+    //           console.log(data)
+    //           setOrders(data);
+    //         })
     //     }
-    // },[user])
-    const [appointments, setAppointments] = useState([]);
-  useEffect(() => {
-    if (user) {
-      fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
+    //   }, [user])
+    /* delet using react query */
+    const { data: services, isLoading, refetch } = useQuery(['orders', userEmail], () => fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
         method: 'GET',
         headers: {
-          'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
-      })
-        .then(res => {
-          console.log('res', res);
-          if (res.status === 401 || res.status === 403) {
-            navigate('/');
-            // signOut(auth);
-            // localStorage.removeItem('accessToken');
-          }
-
-          return res.json()
-        })
-        .then(data => {
-          console.log(data)
-          setAppointments(data);
-        })
+    }).then(res => res.json()));
+    if (isLoading) {
+        return <ReactSpinner />
     }
-  }, [user])
 
 
 
@@ -75,7 +63,7 @@ const MyOrders = () => {
         {
             field: "action",
             headerName: "Action",
-              width: 200,
+            width: 200,
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
@@ -96,7 +84,8 @@ const MyOrders = () => {
 
     return (
         <div className="datatable">
-            <h1>My Orders: {appointments?.length} </h1>
+            <h1>My Orders: {orders?.length} </h1>
+            <h1>My Orders get react query: {services?.length} </h1>
             <div className="datatableTitle">
                 Add New User
                 <Link to="/users/new" className="link">
