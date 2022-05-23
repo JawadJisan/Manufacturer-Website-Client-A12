@@ -1,4 +1,4 @@
-.f-container{
+.newContainer{
     display: grid;
     grid-template-columns: 1fr 2fr;
     /* flex: 6; */
@@ -18,15 +18,14 @@ justify-content: center;
     border-radius: 50%;
     /* object-fit: cover; */
 }
-form{
-    display: flex;
-    flex-wrap: wrap;
+.formss{
+    display: grid;
+    /* flex-wrap: wrap; */
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
-.formInput{
-    /* width: 40%; */
-}
+
 label{
     display: flex;
     align-items: center;
@@ -51,10 +50,10 @@ input{
     cursor: pointer;
     margin-top: 10px;
 }
-.finput{
+/* .finput{
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
+} */
 /* .submitbtn{
     display: grid;
     grid-template-columns: auto auto 1fr;

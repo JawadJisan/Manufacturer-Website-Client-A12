@@ -1,12 +1,109 @@
-import React from 'react';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+// import './AddReview.css'
+import { FaFolderPlus } from "react-icons/fa";
+import axios from "axios";
+import auth from "../../../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import ReactSpinner from "../../../Sheared/ReactSpinner";
 
-const MyProfile = () => {
-    return (
-        <div>
-            My Profile
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad consectetur, ratione dolores sed non facilis similique officiis reiciendis vitae quibusdam veniam recusandae architecto, hic quam? Distinctio cumque enim sint deserunt.
-        </div>
-    );
+
+const MyProfile = ({ inputs, title }) => {
+  const [user, loading, error] = useAuthState(auth);
+//   console.log(user);
+
+
+  const [file, setFile] = useState("");
+  const [imageUrl, setImageUrl] = useState('');
+  console.log(imageUrl, 'srate')
+  const { register, formState: { errors }, handleSubmit } = useForm();
+
+  const imageBBApiKey = '87dddf2da47f63b4b871952317bd5a8b';
+
+  const onSubmit = async data => {
+    const newDoc = {...data, image:imageUrl}
+    fetch('http://localhost:5000/addReview',{
+                    method: 'POST',
+                    headers:{
+                        'content-type':'application/json',
+                        authorization:`Bearer ${localStorage.getItem('accessToken')}`
+                    },
+                    body: JSON.stringify(newDoc)
+                })
+                .then(res=>res.json())
+                .then(inserted=>{
+                  if(inserted.insertedId){
+                    alert('Doctors Added Successfully')
+                  }
+                  else{
+                    alert('Failed to add a new Doctor')
+                  }
+
+                })
+  }
+
+
+  if(loading){
+    return <ReactSpinner/>
+}
+
+  return (
+    <div className="  newContainer container">
+      <div className="p-5 img-div">
+        <img
+        
+          src={user?.photoURL}
+          alt=""
+        />
+      </div>
+      <div className="">
+          <form onSubmit={handleSubmit(onSubmit)} className="formInput myprofile formss finput ">
+            <div>
+            <label htmlFor="name">Name:</label>
+            <input required id="name" type="text" value={user.displayName} disabled placeholder="name" 
+            {...register("name")}/>
+            </div>
+
+            <div>
+            <label htmlFor="name">Email:</label>
+            <input required id="name" disabled value={user.email} type="text" placeholder="name" 
+            {...register("name")}/>
+            </div>
+            <div>
+            <label htmlFor="name">Education:</label>
+            <input required id="edu" type="text" placeholder="Your Education" 
+            {...register("edu")}/>
+            </div>
+            <div>
+            <label htmlFor="name">Location:(city/dist) </label>
+            <input required id="location" type="text" placeholder="Your Location" 
+            {...register("location")}/>
+            </div>
+            <div>
+            <label htmlFor="name">Phone: </label>
+            <input required id="number" type="number" placeholder="Your Number" 
+            {...register("number")}/>
+            </div>
+            <div>
+            <label htmlFor="name">Linkdin:</label>
+            <input required id="linkdin" type="text" placeholder="Your Linkdin Profile Link" 
+            {...register("linkdin")}/>
+            </div>
+            <div>
+            <label htmlFor="name">Addintional Info:</label>
+            <textarea className="w-full" required type="addiInfo" placeholder="Tell Us About Yourself" 
+            {...register("addiInfo")}/>
+            </div>
+            
+            
+            
+            <input className="addBtn submitbtn" type="submit" value="Send" />
+          </form>
+
+        
+      </div>
+    </div>
+  );
 };
 
 export default MyProfile;
