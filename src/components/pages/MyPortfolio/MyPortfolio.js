@@ -22,7 +22,7 @@ const MyPortfolio = () => {
                     <input className='h-6 p-4 mt-4' type="" value='Bsc in ECE(Electronics and communication) 1st semister ' disabled />
                     <div className='items-center  text-center'>
                         <p className='text-2xl p-5'>Find Me On</p>
-                        <div className='flex justify-evenly items-center content-center flex-wrap content-between '>
+                        <div className='flex justify-evenly items-center  flex-wrap content-between '>
                             <a className='icons items-center text-center' href="https://www.facebook.com/profile.php?id=100054546439637"><FaFacebookSquare /></a>
                             <a className='icons' href="https://github.com/JawadJisan"><FaGithubSquare /></a>
                             <a className='icons' href="https://www.linkedin.com/in/ji-san-6a7b69218/"><FaLinkedin /></a>

@@ -18,7 +18,7 @@ const Reviews = () => {
 
     }, [])
     return (
-        <div className='mt-36 container'>
+        <div className='mt-36 '>
             <h1 className='text-center font-mono font-bold text-4xl text-black-400'>USER REVIEWS </h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
 

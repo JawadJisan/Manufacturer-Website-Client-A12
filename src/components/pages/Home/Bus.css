@@ -1,0 +1,19 @@
+/* flex justify-evenly items-center content-center  content-between  */
+.partnersBox{
+    /* display: grid; */
+    display: flex;
+    /* grid-template-columns: repeat(3, 1fr); */
+    align-content: space-between;
+
+}
+.patnersIcon{
+    font-size: 130px;
+    color: blue;
+
+
+}
+.Titles{
+    padding: 10px;
+    text-align: center;
+    font-size: 90px;
+}
