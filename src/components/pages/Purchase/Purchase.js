@@ -112,8 +112,6 @@ const Purchase = () => {
 
     return (
         <div className='flex flex-col items-center justify-center'>
-            {partsId}
-            {partsInfo.name}
             <div class="card  bg-base-100 shadow-xl">
                 <figure class="px-10 pt-10">
                     <img src={partsInfo.image} alt="Shoes" class="rounded-xl" />

@@ -20,6 +20,7 @@ import ManageOrders from '../src/components/pages/Dashboard/Admin Route/ManageOr
 import ManageProducts from '../src/components/pages/Dashboard/Admin Route/ManageProducts'
 import PaymentOrder from './components/pages/Dashboard/User/PaymentOrder';
 import RequireAdmin from './components/pages/Login/RequireAdmin';
+import MyPortfolio from './components/pages/MyPortfolio/MyPortfolio';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Navbar/>
      <Routes>
       <Route path='/' element={<Home/>}></Route>
+      <Route path='/myPortfolio' element={<MyPortfolio/>}></Route>
 
        <Route path='/login' element={<Login/>}></Route>
        {/* <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route> */}

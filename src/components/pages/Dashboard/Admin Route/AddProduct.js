@@ -2,19 +2,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFolderPlus } from "react-icons/fa";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const AddProduct = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [imageUrl, setImageUrl] = useState('');
   console.log(imageUrl, 'srate')
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
   const imageBBApiKey = '87dddf2da47f63b4b871952317bd5a8b';
 
   const onSubmit = async data => {
     const newDoc = {...data, image:imageUrl}
-    fetch('http://localhost:5000/addDoctor',{
+    fetch('http://localhost:5000/addParts',{
                     method: 'POST',
                     headers:{
                         'content-type':'application/json',
@@ -24,13 +25,22 @@ const AddProduct = ({ inputs, title }) => {
                 })
                 .then(res=>res.json())
                 .then(inserted=>{
-                  if(inserted.insertedId){
-                    alert('Doctors Added Successfully')
+                    console.log(inserted, 'admin add product')
+                  if(inserted){
+                    Swal.fire(
+                        'Congratss',
+                        'New Tools  Added Successfully',
+                        'success'
+                    )
+                    reset()
                   }
                   else{
-                    alert('Failed to add a new Doctor')
-                  }
-
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to add a New Tools!!!',
+                    })                  }
+                    reset()
                 })
   }
 
@@ -85,19 +95,26 @@ const AddProduct = ({ inputs, title }) => {
             {...register("name")}/>
             </div>
             <div>
-            <label htmlFor="des">Product Description</label>
-            <textarea className="w-full" required id="des" type="text" placeholder="Product Details" 
-            {...register("des")}/>
+            <label htmlFor="description">Product Description</label>
+            <textarea className="w-full" required id="description" type="text" placeholder="Product Details" 
+            {...register("description")}/>
+            </div>
+            <div>
+            <label htmlFor="availableQuantity">Available quantity</label>
+            <input className="w-full" required id="availableQuantity" type="text" placeholder="Available Quantity" 
+            {...register("availableQuantity")}/>
+            </div>
+            <div>
+            <label htmlFor="minOrderQuantity">Minimum Quantity</label>
+            <input className="w-full" required id="minOrderQuantity" type="text" placeholder="Minimum Quantity" 
+            {...register("minOrderQuantity")}/>
+            </div>
+            <div>
+            <label htmlFor="price">Price</label>
+            <input className="w-full" required id="price" type="text" placeholder="Price" 
+            {...register("price")}/>
             </div>
             
-            <input required type="text" placeholder="email"
-            {...register("email")} />
-
-            <input required type="text" placeholder="role" 
-            {...register("role")}/>
-            
-            <input required type="text" placeholder="type" 
-            {...register("type")}/>
             
             <input className="addBtn submitbtn" type="submit" value="Add Tools" />
           </form>
