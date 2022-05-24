@@ -19,6 +19,7 @@ import MakeAdmin from '../src/components/pages/Dashboard/Admin Route/MakeAdmin'
 import ManageOrders from '../src/components/pages/Dashboard/Admin Route/ManageOrders'
 import ManageProducts from '../src/components/pages/Dashboard/Admin Route/ManageProducts'
 import PaymentOrder from './components/pages/Dashboard/User/PaymentOrder';
+import RequireAdmin from './components/pages/Login/RequireAdmin';
 
 
 function App() {
@@ -40,10 +41,10 @@ function App() {
     <Route path='payment/:id' element={<PaymentOrder/>} />
 
     {/* admin */}
-    <Route path='add-product' element={<AddProduct/>} />
-    <Route path='make-admin' element={<MakeAdmin/>} />
-    <Route path='manage-orders' element={<ManageOrders/>} />
-    <Route path='manage-products' element={<ManageProducts/>} />
+    <Route path='add-product' element={<RequireAdmin><AddProduct/></RequireAdmin> } />
+    <Route path='make-admin' element={<RequireAdmin><MakeAdmin/></RequireAdmin>} />
+    <Route path='manage-orders' element={<RequireAdmin><ManageOrders/></RequireAdmin>} />
+    <Route path='manage-products' element={<RequireAdmin><ManageProducts/></RequireAdmin>} />
 
     </Route>
 

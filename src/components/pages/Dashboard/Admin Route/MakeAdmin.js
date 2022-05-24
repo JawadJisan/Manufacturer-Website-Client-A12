@@ -1,10 +1,45 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import ReactSpinner from '../../../Sheared/ReactSpinner';
+import AdminUserRow from './AdminUserRow';
 
 const MakeAdmin = () => {
+    const {data: users, isLoading, refetch } = useQuery(['users'],()=> fetch(`http://localhost:5000/users`,{
+        method:'GET',
+        headers:{
+            authorization:`Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+.then(res => res.json())
+)
+if(isLoading){
+    return <ReactSpinner/>
+}
     return (
         <div>
-            MakeAdmin.jsMakeAdmin.js
-            MakeAdmin.jsMakeAdmin.js
+            <h2 className='text-2xl text-center'> All users: {users?.length} </h2>
+            <div class="overflow-x-auto">
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Favorite Color</th>
+      </tr>
+    </thead>
+        <tbody>
+      {
+          users.map((user, index )=><AdminUserRow
+          key={user._id}
+          index={index}
+          user={user}
+          refetch={refetch}
+          ></AdminUserRow> )
+      }
+    </tbody>
+  </table>
+</div>
         </div>
     );
 };

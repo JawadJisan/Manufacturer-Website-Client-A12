@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import './AddReview.css'
 import { FaFolderPlus } from "react-icons/fa";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const AddReview = ({ inputs, title }) => {
     const [file, setFile] = useState("");
     const [imageUrl, setImageUrl] = useState('');
     console.log(imageUrl, 'srate')
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const imageBBApiKey = '87dddf2da47f63b4b871952317bd5a8b';
 
@@ -26,10 +27,20 @@ const AddReview = ({ inputs, title }) => {
             .then(res => res.json())
             .then(inserted => {
                 if (inserted.insertedId) {
-                    alert('Review Added Successfully')
+                    Swal.fire(
+                        'Congratss',
+                        'Review Added Successfully',
+                        'success'
+                    )
+                    reset()
                 }
                 else {
-                    alert('Failed to add a Review')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to add a Review!!!',
+                    })
+                    reset();
                 }
 
             })
@@ -87,18 +98,15 @@ const AddReview = ({ inputs, title }) => {
                                 {...register("name")} />
                         </div>
                         <div>
-                            <label htmlFor="name">Enter Your Name</label>
-                            <input required id="name" type="text" placeholder="name"
-                                {...register("name")} />
+                            <label htmlFor="rating">Reitings</label>
+                            <input required id="rating" type="text" placeholder="rating"
+                                {...register("rating")} />
                         </div>
 
-                        <input required type="text" placeholder="email"
-                            {...register("email")} />
+                       
 
-                        <input required type="text" placeholder="role"
-                            {...register("role")} />
 
-                        <textarea required type="text" placeholder="type"
+                        <textarea required type="text" placeholder="Description"
                             {...register("type")} />
 
                         <input className="addBtn submitbtn" type="submit" value="Send" />
