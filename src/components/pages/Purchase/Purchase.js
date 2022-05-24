@@ -13,9 +13,11 @@ const Purchase = () => {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [qty, setQuantity] = useState('');
-    console.log(qty,'quantity')
+    // console.log(qty, 'quantity')
 
     const { partsId } = useParams();
+
+
 
     const url = `http://localhost:5000/part/${partsId}`
     const { data: partsInfo, isLoading } = useQuery(['part', partsId], () => fetch(url, {
@@ -33,7 +35,7 @@ const Purchase = () => {
     //     if(quantit == {partsInfo.minOrderQuantity}){
 
     //     }
-    const handlePurchase = event =>{
+    const handlePurchase = event => {
         event.preventDefault();
         const quantity = event.target.quantity.value;
         // if(quantity  )
@@ -41,45 +43,67 @@ const Purchase = () => {
         // if(quantity){
         //     // quantity = 
         // }
-        const purchase={
+        const purchase = {
             name: partsInfo.name,
             image: partsInfo.image,
             description: partsInfo.description,
             price: partsInfo.price,
             userEmail: user?.email,
             userName: user?.displayName,
-            address, phone
+            address, phone, 
+            quantity: qty,
         }
-        fetch('http://localhost:5000/purchase',{
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-            body: JSON.stringify(
-                purchase
-              ),
-        })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.success){
-                Swal.fire(
-                    'Your Purchase Is Compleate !',
-                    'You clicked the button!',
-                    'success'
-                  )
-                // toast(`Appointment is set, ${formatedDate} at ${slot}`)
-                console.log(data)
-            }
-            else{
-                // toast(`You Already Have an Appointment on, ${data.booking?.date} at ${data.booking?.slot}`)
-                console.log(data)
+        // const newOrder = partsInfo.availableQuantity - qty;
+        // console.log(newOrder, 'new order')
 
-            }
-            // refetch();
-            // setTreatment(null)
-            // to close the Modal
-        } )
-        
+        // if (qty <= partsInfo.minOrderQuantity || qty >= partsInfo.availableQuantity) {
+        if (qty <50 || qty>500 ) {
+            Swal.fire(
+                'Your Purchase Is Compleate !!!!',
+                'You clicked the button!',
+                'error',
+                // 'new item collection =' {partsInfo.availableQuantit}
+            )
+        }
+        else {
+            fetch('http://localhost:5000/purchase', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify(
+                    purchase
+                ),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire(
+                            'Your Purchase Is Compleate !',
+                            'You clicked the button!',
+                            'success',
+                        )
+                        console.log(data)
+                        const quantity = partsInfo.availableQuantity - qty;
+                        console.log(quantity, 'new quantity')
+                        // fetch(`http://localhost:5000/part/${partsId}`, {
+                        //     method: 'PATCH',
+                        //     headers: {
+                        //         'content-type': 'application/json',
+                        //         'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        //     },
+                        //     body: JSON.stringify(quantity)
+                        // }).then(res => res.json()).then(data => {
+                        //     console.log(data, 'not qty updated')
+                        // })
+                    }
+                    else {
+                        console.log(data)
+                    }
+                    // refetch();
+                })
+        }
+
 
 
 
@@ -111,7 +135,8 @@ const Purchase = () => {
                             <label class="label">
                                 <span required class="label-text">QUANTITY</span>
                             </label>
-                            <input type="number" onChange={(e)=>setQuantity(e.target.value)}  name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />                        
+                            <input type="number" onChange={(e) => setQuantity(e.target.value)} name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />
+                            <input type="text" value={qty} />
                         </div>
 
                         {/* address */}
@@ -119,14 +144,9 @@ const Purchase = () => {
                         <input type="text" required onChange={(e) => setAddress(e.target.value)} name='address' placeholder="Shipping Address" class="input input-bordered w-full max-w-xs" />
                         <input type="number" required onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" class="input input-bordered w-full max-w-xs" />
 
-                        {(qty === partsInfo.minOrderQuantity && partsInfo.availableQuantity) && 
-                        <div>
-                            <button className='btn '>CLICK ME</button>
-                        </div> 
-                        }
-                        
 
-                        <input type="submit" value='Purchase' className="btn btn-secondary w-full max-w-xs" />
+
+                        {<input type="submit" value='Purchase' className="btn btn-secondary w-full max-w-xs" />}
                     </div>
                 </form>
             </div>

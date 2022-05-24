@@ -4,8 +4,7 @@ import ReactSpinner from '../../Sheared/ReactSpinner';
 import PurchaseSingle from './PurchaseSingle';
 
 const PartsAll = () => {
-    // const {data: parts, isLoading, refetch} = useQuery('allParts',()=>fetch(`http://localhost:5000/allParts`))
-    // .then(res=>res.json())
+    
     const { data: allParts, isLoading, refetch } = useQuery('allParts', () =>
      fetch('http://localhost:5000/allParts').then(res =>
        res.json())
