@@ -13,7 +13,6 @@ const Dashboard = () => {
             <div class="drawer-content flex flex-col items-center justify-center">
                 {/* <!-- Page content here --> */}
 
-                <h1 className='text-3xl text-center'>Welcome to Your Dashboard </h1>
                 <Outlet></Outlet>
 
             </div>

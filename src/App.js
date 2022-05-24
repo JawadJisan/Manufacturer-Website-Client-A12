@@ -22,6 +22,7 @@ import PaymentOrder from './components/pages/Dashboard/User/PaymentOrder';
 import RequireAdmin from './components/pages/Login/RequireAdmin';
 import MyPortfolio from './components/pages/MyPortfolio/MyPortfolio';
 import Footer from './components/pages/Home/Footer';
+import Blogs from './components/pages/Blogs/Blogs';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
      <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/myPortfolio' element={<MyPortfolio/>}></Route>
+      <Route path='/blogs' element={<Blogs/>}></Route>
 
        <Route path='/login' element={<Login/>}></Route>
        {/* <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route> */}

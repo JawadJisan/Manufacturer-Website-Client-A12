@@ -20,31 +20,7 @@ const MyOrders = () => {
     const userEmail = user?.email;
     const navigate = useNavigate();
 
-    //   useEffect(() => {
-    //     if (user) {
-    //       fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
-    //         method: 'GET',
-    //         headers: {
-    //           'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    //         }
-    //       })
-    //         .then(res => {
-    //           console.log('res', res);
-    //           if (res.status === 401 || res.status === 403) {
-    //             navigate('/');
-    //             // signOut(auth);
-    //             // localStorage.removeItem('accessToken');
-    //           }
-
-    //           return res.json()
-    //         })
-    //         .then(data => {
-    //           console.log(data)
-    //           setOrders(data);
-    //         })
-    //     }
-    //   }, [user])
-    /* delet using react query */
+    
     const { data: services, isLoading, refetch } = useQuery(['orders', userEmail], () => fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
         method: 'GET',
         headers: {
@@ -66,7 +42,7 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h2 className='text-3xl text-center'>Manage Doctors: {services.length} </h2>
+            <h2 className='text-3xl text-center'>My Orders: {services.length} </h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
