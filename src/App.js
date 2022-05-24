@@ -21,6 +21,7 @@ import ManageProducts from '../src/components/pages/Dashboard/Admin Route/Manage
 import PaymentOrder from './components/pages/Dashboard/User/PaymentOrder';
 import RequireAdmin from './components/pages/Login/RequireAdmin';
 import MyPortfolio from './components/pages/MyPortfolio/MyPortfolio';
+import Footer from './components/pages/Home/Footer';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
 
        <Route path='*' element={<NotFound/>}></Route>
      </Routes>
+     <Footer/>
 
     </div>
   );

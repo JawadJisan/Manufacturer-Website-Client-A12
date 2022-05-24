@@ -8,7 +8,7 @@
 .container {
   width: 100%;
   border-radius: 30px;
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 .skills {
   text-align: right;
