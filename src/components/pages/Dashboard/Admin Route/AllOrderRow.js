@@ -1,11 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const AllOrderRow = ({ order, index , setDeletOrder}) => {
-    const { name, image, userEmail, } = order;
+const AllOrderRow = ({ order, index, setDeletOrder }) => {
+    const { name, image, userEmail, _id } = order;
 
-    const handleDeleteUnpaidOrder = event=>{
+    const handleShipment = id =>{
+        fetch(`http://localhost:5000/changeStatus/${id}`, {
+        method: 'PUT',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => {
+            if (res.status === 403) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Faield Shipped Your Order!!!',
+                })
 
+            }
+            return res.json()
+        })
+        .then(data => {
+            console.log(data, 'Order Shipped')
+            if (data.modifiedCount > 0) {
+                // refetch();
+                Swal.fire(
+                    'Congratss',
+                    'Your Ordere is Shipped Successfully',
+                    'success'
+                )
+            }
+        })
     }
 
     return (
@@ -23,9 +51,9 @@ const AllOrderRow = ({ order, index , setDeletOrder}) => {
 
             </td>
             <td>
-                {(order?.price && !order.paid) && <button className='btn btn-xs btn-error'>Unpaid</button> }
+                {(order?.price && !order.paid) && <button className='btn btn-xs btn-error'>Unpaid</button>}
                 {(order?.price && order.paid) && <div>
-                    <p><span className='text-success'>Panding</span></p>
+                    <button className='btn btn-success btn-sm' onClick={()=> handleShipment(_id)}>Panding</button>
                     <p> Transaction Id: <span className='text-success'>{order.transactionId} </span></p>
                 </div>}
             </td>
