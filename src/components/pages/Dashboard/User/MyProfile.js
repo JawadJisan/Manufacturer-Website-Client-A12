@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import ReactSpinner from "../../../Sheared/ReactSpinner";
 import Swal from "sweetalert2";
 import { FcBusinesswoman } from "react-icons/fc";
+import { useQuery } from "react-query";
 
 
 
@@ -15,6 +16,7 @@ const MyProfile = ({ inputs, title }) => {
     const [user, loading, error] = useAuthState(auth);
     //   console.log(user);
 
+   
 
     const [file, setFile] = useState("");
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -23,36 +25,71 @@ const MyProfile = ({ inputs, title }) => {
 
     const onSubmit = async data => {
         console.log(data)
-        const newDoc = { ...data, userName:user.displayName, email:user.email}
-        fetch('http://localhost:5000/createProfile', {
-            method: 'POST',
+        const newDoc = { ...data, userName: user.displayName, email: user.email }
+
+        // fetch('http://localhost:5000/createProfile', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        //     },
+        //     body: JSON.stringify(newDoc)
+        // })
+        //     .then(res => res.json())
+        //     .then(inserted => {
+        //         if (inserted.insertedId) {
+        //             Swal.fire(
+        //                 'Congratss',
+        //                 'Your Profile Create Successfully',
+        //                 'success'
+        //               )
+        //               reset()
+        //         }
+        //         else {
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Oops...',
+        //                 text: 'Something went wrong!',
+        //               })
+        //         }
+
+        //     })
+        fetch(`http://localhost:5000/createProfile/${user.email}`, {
+            method: 'PUT',
             headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                'content-type': 'application/json'
             },
             body: JSON.stringify(newDoc)
         })
             .then(res => res.json())
-            .then(inserted => {
-                if (inserted.insertedId) {
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
                     Swal.fire(
                         'Congratss',
-                        'Your Profile Create Successfully',
+                        'Your Profile Updated Successfully',
                         'success'
-                      )
-                      reset()
+                    )
+                    reset()
                 }
                 else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Something went wrong!',
-                      })
+                    })
                 }
-
             })
     }
-
+    const { data: services, isLoading, refetch } = useQuery(['userProfile', user?.email], () => fetch(`http://localhost:5000/userProfile/${user?.email}`, {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()).then(data=>console.log(data)));
+    if (isLoading) {
+        return <ReactSpinner />
+    }
 
     if (loading) {
         return <ReactSpinner />
@@ -60,10 +97,11 @@ const MyProfile = ({ inputs, title }) => {
 
     return (
         <div className="  newContainer container">
+            {/* <p>{services.displayName} </p> */}
             <div className="p-5 img-div">
                 <img
 
-                    src={user?.photoURL ? user?.photoURL : <FcBusinesswoman/>}
+                    src={user?.photoURL ? user?.photoURL : <FcBusinesswoman />}
                     alt=""
                 />
             </div>
@@ -82,7 +120,7 @@ const MyProfile = ({ inputs, title }) => {
                     </div>
                     <div>
                         <label htmlFor="name">Education:</label>
-                        <input required id="edu" type="text" placeholder="Your Education"
+                        <input required id="edu" type="text" placeholder={services ? services.edu : "Your Education" }
                             {...register("edu")} />
                     </div>
                     <div>

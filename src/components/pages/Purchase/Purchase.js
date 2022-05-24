@@ -12,6 +12,8 @@ const Purchase = () => {
     const [user, loading, error] = useAuthState(auth);
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
+    const [qty, setQuantity] = useState('');
+    console.log(qty,'quantity')
 
     const { partsId } = useParams();
 
@@ -33,7 +35,9 @@ const Purchase = () => {
     //     }
     const handlePurchase = event =>{
         event.preventDefault();
-        // const quantity = event.target.quantity.value;
+        const quantity = event.target.quantity.value;
+        // if(quantity  )
+        console.log(quantity, 'from quantit')
         // if(quantity){
         //     // quantity = 
         // }
@@ -107,7 +111,7 @@ const Purchase = () => {
                             <label class="label">
                                 <span required class="label-text">QUANTITY</span>
                             </label>
-                            <input type="number" name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />                        
+                            <input type="number" onChange={(e)=>setQuantity(e.target.value)}  name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />                        
                         </div>
 
                         {/* address */}
@@ -115,7 +119,12 @@ const Purchase = () => {
                         <input type="text" required onChange={(e) => setAddress(e.target.value)} name='address' placeholder="Shipping Address" class="input input-bordered w-full max-w-xs" />
                         <input type="number" required onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" class="input input-bordered w-full max-w-xs" />
 
-
+                        {(qty === partsInfo.minOrderQuantity && partsInfo.availableQuantity) && 
+                        <div>
+                            <button className='btn '>CLICK ME</button>
+                        </div> 
+                        }
+                        
 
                         <input type="submit" value='Purchase' className="btn btn-secondary w-full max-w-xs" />
                     </div>
