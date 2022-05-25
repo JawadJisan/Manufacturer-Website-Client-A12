@@ -7,7 +7,7 @@ import { FaFacebookSquare, FaGithubSquare, FaLinkedin } from "react-icons/fa";
 
 const MyPortfolio = () => {
     return (
-        <div className='flex flex-col items-center justify-center mt-8'>
+        <div className='flex flex-col items-center justify-center mt-44 mb-36'>
             <div class="avatar">
                 <div class=" rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                     <img src={img}
@@ -70,11 +70,11 @@ const MyPortfolio = () => {
                             <h2 class="card-title">Warehouse Management</h2>
                             <p>[web app] [april 2022]</p>
                             <ul className='text-left'>
-                                    <li>Product Add Facility</li>
-                                    <li>Add New Product</li>
-                                    <li>Log in Facility</li>
-                                </ul>
-                                <br />
+                                <li>Product Add Facility</li>
+                                <li>Add New Product</li>
+                                <li>Log in Facility</li>
+                            </ul>
+                            <br />
                             <div class="card-actions justify-end">
                                 <a target='_blank' href='https://warehouse-client-1a22b.web.app/' class="btn btn-primary">Live demo</a>
                             </div>
@@ -85,11 +85,11 @@ const MyPortfolio = () => {
                             <h2 class="card-title">PERSONAL SERVICE PROVIDER</h2>
                             <p>[web app] [april 2022]</p>
                             <ul className='text-left'>
-                                    <li>Any User or Agency get Available Services.</li>
-                                    <li>Secure Athentication.</li>
-                                    <li>User login Register Facility</li>
-                                </ul>
-                                <br />
+                                <li>Any User or Agency get Available Services.</li>
+                                <li>Secure Athentication.</li>
+                                <li>User login Register Facility</li>
+                            </ul>
+                            <br />
                             <div class="card-actions justify-end">
                                 <a target='_blank' href='https://personal-service-assignment10.web.app/' class="btn btn-primary">Live demo</a>
                             </div>
@@ -100,11 +100,11 @@ const MyPortfolio = () => {
                             <h2 class="card-title">PRODUCT REVIEW</h2>
                             <p>[web app] [March 2022]</p>
                             <ul className='text-left'>
-                                    <li>know specification about gadgets.</li>
-                                    <li>know specification about gadgets.</li>
-                                    <li>User Review</li>
-                                </ul>
-                                <br />
+                                <li>know specification about gadgets.</li>
+                                <li>know specification about gadgets.</li>
+                                <li>User Review</li>
+                            </ul>
+                            <br />
                             <div class="card-actions justify-end">
                                 <a target='_blank' href='https://product-review-assignment9.netlify.app/' class="btn btn-primary">Live demo</a>
                             </div>
@@ -115,10 +115,10 @@ const MyPortfolio = () => {
                             <h2 class="card-title">Choose Your Lucky Super CAR</h2>
                             <p>[web app] [March 2022]</p>
                             <ul className='text-left'>
-                                    <li>Add to Your Cart in Some Super Cars</li>
-                                    <li>Know Specifications about superCar.</li>
-                                </ul>
-                                <br />
+                                <li>Add to Your Cart in Some Super Cars</li>
+                                <li>Know Specifications about superCar.</li>
+                            </ul>
+                            <br />
                             <div class="card-actions justify-end">
                                 <a target='_blank' href='https://playful-druid-80dbda.netlify.app/' class="btn btn-primary">Live demo</a>
                             </div>

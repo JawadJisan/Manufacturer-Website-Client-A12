@@ -94,7 +94,7 @@ const Login = () => {
     }
 
     return (
-        <div className="login-contain">
+        <div className="login-contain ">
             <div className={newUser ? "login-container right-panel-active" : "login-container"} id="container">
                 <div className={newUser ? "form-container sign-up-container" : "form-container sign-in-container"}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>

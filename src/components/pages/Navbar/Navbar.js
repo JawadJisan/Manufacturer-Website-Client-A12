@@ -1,56 +1,135 @@
-import { signOut } from 'firebase/auth';
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
-import auth from '../../../firebase.init';
+import { signOut } from "firebase/auth";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import auth from "../../../firebase.init";
 
-const Navbar = () => {
+const Navbar = ({ children }) => {
   const [user, loading, error] = useAuthState(auth);
   console.log(user)
-
   const logout = () => {
     signOut(auth);
     localStorage.removeItem('accessToken')
   }
+  const { pathname } = useLocation()
+  console.log(pathname)
 
-  const menuItems = <>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/review'>Reviews</Link></li>
-    <li><Link to='/contact'>Contact</Link></li>
-    <li><Link to='/about'>About</Link></li>
-    {
-      user && <li><Link to='/dashboard'>Dashboard</Link></li>
-    }
-    <li>{user ? <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>
-      : <Link to='/login'>Login</Link>}</li>
-  </>
   return (
-    <div className=''>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <label tabIndex="0" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+    <div class='drawer  drawer-end relative' >
+      <input id='my-drawer-3' type='checkbox' class='drawer-toggle' />
+      <div class='drawer-content flex flex-col'>
+        <div class='w-full navbar bg-blue-200 fixed top-0 z-50 lg:px-20'>
+          {pathname === '/dashboard' && <label for="my-drawer-2" tabindex="0" class="btn btn-ghost btn-circle drawer-button lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+          </label>}
+          <div class='flex-1 px-2 mx-2 text-2xl'><Link to='/'>RIPARA..</Link> </div>
+          <div class='flex-none lg:hidden'>
+            <label for='my-drawer-3' class='btn btn-square btn-ghost'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                class='inline-block w-6 h-6 stroke-current'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M4 6h16M4 12h16M4 18h16'
+                ></path>
+              </svg>
             </label>
-            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              {menuItems}
-
+          </div>
+          <div class='flex-none hidden lg:block'>
+            <ul class='menu menu-horizontal gap-x-2'>
+              <li>
+                <NavLink to='/' className='rounded-lg'>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/myPortfolio' className='rounded-lg'>
+                  My Portfolio
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/contact' className='rounded-lg'>
+                  Contact
+                </NavLink>
+              </li>
+              <li>
+                <li>{user ? <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>
+                  : <NavLink to='/login' className='rounded-lg'>
+                  Login
+                </NavLink>}</li>
+                
+              </li>
+              <li>
+                {user && <NavLink to='/dashboard' className='rounded-lg'>
+                  Dashboard
+                </NavLink>}
+              </li>
+              {user &&
+                <div class="dropdown dropdown-end">
+                  <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                      <img src={user?.photoURL ? user?.photoURL : 'USER'} />
+                    </div>
+                  </label>
+                  <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                    <li>{user && <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>}
+                    </li>
+                  </ul>
+                </div>
+              }
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">RIPARA</a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            {menuItems}
-          </ul>
-        </div>
-        {/*  */}
-    
-        <div className="navbar-end">
-          <label htmlFor='dashboard-sidebar' tabIndex="1" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-          </label>
-        </div>
+        {children}
+      </div>
+      <div class='drawer-side'>
+        <label for='my-drawer-3' class='drawer-overlay'></label>
+        <ul class='menu p-4 overflow-y-auto w-80 bg-base-100'>
+          <li>
+            <NavLink to='/' className='rounded-lg'>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/myPortfolio' className='rounded-lg'>
+              My Portfolio
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/contact' className='rounded-lg'>
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/login' className='rounded-lg'>
+              Login
+            </NavLink>
+          </li>
+          <li>
+            {user && <NavLink to='/dashboard' className='rounded-lg'>
+              Dashboard
+            </NavLink>}
+          </li>
+          {user &&
+            <div class="dropdown dropdown-end">
+              <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                  <img src={user?.photoURL ? user?.photoURL : 'USER'} />
+                </div>
+              </label>
+              <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                <li>{user && <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>}
+                </li>
+              </ul>
+            </div>
+          }
+        </ul>
       </div>
     </div>
   );

@@ -24,39 +24,43 @@ import MyPortfolio from './components/pages/MyPortfolio/MyPortfolio';
 import Footer from './components/pages/Home/Footer';
 import Blogs from './components/pages/Blogs/Blogs';
 
+/*  */
+
 
 function App() {
   return (
     <div className="">
-      <Navbar/>
-     <Routes>
-      <Route path='/' element={<Home/>}></Route>
-      <Route path='/myPortfolio' element={<MyPortfolio/>}></Route>
-      <Route path='/blogs' element={<Blogs/>}></Route>
+      <Navbar>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/myPortfolio' element={<MyPortfolio />}></Route>
+          <Route path='/blogs' element={<Blogs />}></Route>
 
-       <Route path='/login' element={<Login/>}></Route>
-       {/* <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route> */}
-       <Route path='/purchase/:partsId' element={<RequireAuth><Purchase/></RequireAuth> }></Route>
+          <Route path='/login' element={<Login />}></Route>
+          {/* <Route path='/purchase' element={<RequireAuth><Purchase/> </RequireAuth> }></Route> */}
+          <Route path='/purchase/:partsId' element={<RequireAuth><Purchase /></RequireAuth>}></Route>
 
-    {/* Dashboard */}
-    <Route path='/dashboard' element={<RequireAuth><Dashboard/></RequireAuth>}>
-    <Route path='add-review' element={<AddReview/>} />
-    {/* <Route index element={<MyOrders/>} /> */}
-    <Route path='my-orders' element={<MyOrders/>} />
-    <Route path='my-profile' element={<MyProfile/>} />
-    <Route path='payment/:id' element={<PaymentOrder/>} />
+          {/* Dashboard */}
+          {/* <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}> */}
+          <Route path='/dashboard' element={<RequireAuth><Dashboard/></RequireAuth>}>
+            <Route path='add-review' element={<AddReview />} />
+            {/* <Route index element={<MyOrders/>} /> */}
+            <Route path='my-orders' element={<MyOrders />} />
+            <Route path='my-profile' element={<MyProfile />} />
+            <Route path='payment/:id' element={<PaymentOrder />} />
 
-    {/* admin */}
-    <Route path='add-product' element={<RequireAdmin><AddProduct/></RequireAdmin> } />
-    <Route path='make-admin' element={<RequireAdmin><MakeAdmin/></RequireAdmin>} />
-    <Route path='manage-orders' element={<RequireAdmin><ManageOrders/></RequireAdmin>} />
-    <Route path='manage-products' element={<RequireAdmin><ManageProducts/></RequireAdmin>} />
+            {/* admin */}
+            <Route path='add-product' element={<RequireAdmin><AddProduct /></RequireAdmin>} />
+            <Route path='make-admin' element={<RequireAdmin><MakeAdmin /></RequireAdmin>} />
+            <Route path='manage-orders' element={<RequireAdmin><ManageOrders /></RequireAdmin>} />
+            <Route path='manage-products' element={<RequireAdmin><ManageProducts /></RequireAdmin>} />
 
-    </Route>
+          </Route>
 
-       <Route path='*' element={<NotFound/>}></Route>
-     </Routes>
-     <Footer/>
+          <Route path='*' element={<NotFound />}></Route>
+        </Routes>
+        <Footer />
+      </Navbar>
 
     </div>
   );
