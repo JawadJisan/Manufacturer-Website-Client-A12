@@ -23,6 +23,7 @@ const DashboardSidebar = ({ children }) => {
                     <li><Link to='/dashboard/add-review'>Add Review</Link></li>
                     <li><Link to='/dashboard/my-orders'>My Orders</Link></li>
                     <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
+                    <li><Link to='blogs'>My Profile</Link></li>
                         </>
                     }
                     {

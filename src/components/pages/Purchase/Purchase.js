@@ -23,7 +23,7 @@ const Purchase = () => {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()));
-    if (isLoading) {
+    if (isLoading || error) {
         return <ReactSpinner />
     }
     

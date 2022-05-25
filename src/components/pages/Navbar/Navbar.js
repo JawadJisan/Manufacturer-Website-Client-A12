@@ -54,6 +54,11 @@ const Navbar = ({ children }) => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to='/blogs' className='rounded-lg'>
+                  BLOGS
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to='/contact' className='rounded-lg'>
                   Contact
                 </NavLink>
@@ -61,9 +66,9 @@ const Navbar = ({ children }) => {
               <li>
                 <li>{user ? <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>
                   : <NavLink to='/login' className='rounded-lg'>
-                  Login
-                </NavLink>}</li>
-                
+                    Login
+                  </NavLink>}</li>
+
               </li>
               <li>
                 {user && <NavLink to='/dashboard' className='rounded-lg'>
