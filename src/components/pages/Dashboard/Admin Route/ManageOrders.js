@@ -17,7 +17,7 @@ const ManageOrders = () => {
     }
 
     return (
-        <div className='manage-order'>
+        <div className='manage-order manageOrderDiv'>
             <h2 className='text-2xl text-center'> All users: {allPurchases?.length} </h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">

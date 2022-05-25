@@ -28,6 +28,7 @@
     "sass": "^1.52.1",
     "sweetalert2": "^11.4.15",
     "swiper": "^8.1.5",
+    "typewriter-effect": "^2.18.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

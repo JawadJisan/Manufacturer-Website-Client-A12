@@ -25,7 +25,7 @@ const Navbar = () => {
       : <Link to='/login'>Login</Link>}</li>
   </>
   return (
-    <div>
+    <div className=''>
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">

@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import ReactSpinner from '../../../Sheared/ReactSpinner';
 import AdminUserRow from './AdminUserRow';
+import './ManageOrder.css'
+
 
 const MakeAdmin = () => {
     const { data: users, isLoading, refetch } = useQuery(['users'], () => fetch(`http://localhost:5000/users`, {
@@ -15,17 +17,18 @@ const MakeAdmin = () => {
     if (isLoading) {
         return <ReactSpinner />
     }
+    
     return (
         <div>
             <h2 className='text-2xl text-center'> All users: {users?.length} </h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div class="overflow-x-auto ">
+                <table class="table w-full tableWidth">
                     <thead>
-                        <tr>
+                        <tr className='w-full'>
                             <th></th>
-                            <th>Name</th>
+                            <th className=''>Name</th>
                             <th>Role</th>
-                            <th>Favorite Color</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

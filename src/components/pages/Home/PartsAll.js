@@ -13,8 +13,8 @@ const PartsAll = () => {
     return <ReactSpinner/>
 }
     return (
-        <div className=''>
-            <p>Available Parts: {allParts.length} </p>
+        <div className='mt-20'>
+            <p className='text-center text-red-500 text-5xl font-serif font-bold'> Available Parts in Our Stocks</p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     allParts?.map(part => <PurchaseSingle

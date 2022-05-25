@@ -1,3 +1,10 @@
-.manage-order{
+/* .manage-order{
     margin-top: 500px;
+} */
+.manageOrderDiv{
+    /* padding: 500px; */
+    margin-top: 2000px;
+}
+.tableWidth{
+    width: 100%;
 }

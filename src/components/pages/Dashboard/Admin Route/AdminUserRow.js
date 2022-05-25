@@ -1,6 +1,7 @@
 import React from 'react';
-import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { FaTrashAlt } from "react-icons/fa";
+
 
 const AdminUserRow = ({ user, index, refetch }) => {
     const { email, role } = user;
@@ -33,12 +34,39 @@ const AdminUserRow = ({ user, index, refetch }) => {
                 }
           })
     }
+    function archiveFunction(event) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Want To Delet This User?!? ",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`http://localhost:5000/user/${user._id}`, {
+              method: 'DELETE',
+              headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+              }
+            })
+              .then(res => res.json())
+              .then(data =>console.log(data))
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+      }
     return (
         <tr class="hover">
             <th>{index + 1} </th>
             <td>{email} </td>
             <td>{role !== 'admin' && <button onClick={makeAdmin} class="btn btn-outline btn-xs">Make Admin</button>} </td>
-            <td>{<button class="btn btn-outline btn-xs">Remove User</button>} </td>
+            <td><p onClick={() => archiveFunction()} className="Qty"> <span className="btn btn-outline btn-primary btn-sm buttoon"><FaTrashAlt className='iccon' />  Delete User</span> </p></td>
         </tr>
     );
 };
