@@ -16,9 +16,10 @@ const ManageOrders = () => {
         return <ReactSpinner />
     }
 
+    
     return (
         <div className='manage-order manageOrderDiv'>
-            <h2 className='text-2xl text-center'> All users: {allPurchases?.length} </h2>
+            <h2 className='text-2xl text-center'> All Orders: {allPurchases?.length} </h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>

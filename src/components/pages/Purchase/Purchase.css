@@ -11,7 +11,7 @@
 }
 .card-bodys{
     width: 55%;
-    height: 55%;
+    /* height: 55%; */
     border: 10px solid rgb(49, 131, 255);
     box-shadow: 20px;
     background-color: rgb(156, 186, 242);

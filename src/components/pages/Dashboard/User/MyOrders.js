@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
@@ -51,6 +50,7 @@ const MyOrders = () => {
                             <th>IMAGE</th>
                             <th>NAME</th>
                             <th>DESCRIPTION</th>
+                            <th>QTY </th>
                             <th>Action</th>
                             <th>Payment</th>
 
@@ -70,16 +70,6 @@ const MyOrders = () => {
                     </tbody>
                 </table>
             </div>
-            {/* {deletOrder && <swalWithBootstrapButtons 
-            setDeletOrder={setDeletOrder}
-            deletOrder={deletOrder}
-            refetch={refetch}
-            />} */}
-            {deletOrder && <DeletConfirmModal 
-            setDeletOrder={setDeletOrder}
-            deletOrder={deletOrder}
-            refetch={refetch}
-            />}
         </div>
     );
 };

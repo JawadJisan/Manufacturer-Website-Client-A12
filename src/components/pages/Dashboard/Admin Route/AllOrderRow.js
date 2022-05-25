@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaTrashAlt } from "react-icons/fa";
 
-const AllOrderRow = ({ order, index, setDeletOrder }) => {
+
+const AllOrderRow = ({ order, index, setDeletOrder, refetch }) => {
     const { name, image, userEmail, _id } = order;
 
     const handleShipment = id =>{
@@ -32,10 +34,40 @@ const AllOrderRow = ({ order, index, setDeletOrder }) => {
                     'Your Ordere is Shipped Successfully',
                     'success'
                 )
+                refetch();
             }
         })
     }
 
+  
+    function archiveFunction(event) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "If You Delet Product will not appear on the home page.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+    fetch(`http://localhost:5000/orders/${_id}`, {
+              method: 'DELETE',
+              headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+              }
+            })
+              .then(res => res.json())
+              .then(data =>console.log(data))
+            Swal.fire(
+              'Deleted!',
+              'This Order Successfully Deleted',
+              'success'
+            )
+            refetch();
+          }
+        })
+      }
     return (
         <tr>
             <th>{index + 1} </th>
@@ -47,7 +79,7 @@ const AllOrderRow = ({ order, index, setDeletOrder }) => {
             <td>{name} </td>
             <td>{userEmail} </td>
             <td>
-                {!order.paid && <label for="delet-confirm-modal" onClick={() => setDeletOrder(order)} class="btn btn-xs"> DELET </label>}
+                {!order.paid && <p onClick={() => archiveFunction()} className="Qty"> <span className="btn btn-outline btn-primary btn-sm buttoon"><FaTrashAlt className='iccon' />  DELET ORDER</span> </p>}
 
             </td>
             <td>
@@ -58,7 +90,7 @@ const AllOrderRow = ({ order, index, setDeletOrder }) => {
                     <button className='btn btn-success btn-sm' onClick={()=> handleShipment(_id)}>Panding</button>
                 </div>}
                 {order?.status && <button className='btn btn-primary'>Shipped</button> }
-                
+               
                 {/* {!order.status && order.paid ? <div>
                     <button className='btn btn-success btn-sm' onClick={()=> handleShipment(_id)}>Panding</button>
                 </div>:

@@ -15,12 +15,9 @@ const Purchase = () => {
     const [qty, setQuantity] = useState('');
 
     const { partsId } = useParams();
-    
-    
 
-    
     const url = `http://localhost:5000/part/${partsId}`
-    const { data: partsInfo, isLoading } = useQuery(['part', partsId], () => fetch(url, {
+    const { data: partsInfo, isLoading, refetch } = useQuery(['part', partsId], () => fetch(url, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -52,19 +49,13 @@ const Purchase = () => {
             quantity: qty,
             availableQuantity: partsInfo.availableQuantity - qty,
         }
-        // const newOrder = partsInfo.availableQuantity - qty;
-        // console.log(newOrder, 'new order')
-
-        // if (qty <= partsInfo.minOrderQuantity || qty >= partsInfo.availableQuantity) {
-        // if (qty <= partsInfo.minOrderQuantity) {
-        //     Swal.fire(
-        //         'You have to select More then Minimum Quantity And Lower Than Available Quantity',
-        //         'Enter Your Quantity Avove Min Quantity',
-        //         'error',
-        //         // 'new item collection =' {partsInfo.availableQuantit}
-        //     )
-        // }
-        // else {
+        if(qty < partsInfo.minOrderQuantity || qty > partsInfo.availableQuantity ){
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You Have to Select Quantity More the Minimum Quantity ?? and Higher Then Available Quantity',
+              })
+        }
             fetch('http://localhost:5000/purchase', {
                 method: 'POST',
                 headers: {
@@ -83,9 +74,9 @@ const Purchase = () => {
                             'You clicked the button!',
                             'success',
                         )
+                    refetch();
 
                         /* ------- put new quantity on the Home page */
-
                             fetch(`http://localhost:5000/changeQty/${partsId}`, {
                             method: 'PUT',
                             headers: {
@@ -93,28 +84,19 @@ const Purchase = () => {
                                 'content-type':'application/json'
                             },
                             body:JSON.stringify(purchase)
-
                         })
                             .then(res => res.json())                    
                             .then(data => console.log(data))
-                        
-                    
                     }
                     else {
                         console.log(data)
                     }
-                    // refetch();
                 })
         // }
-
-
-
-
     }
 
-
     return (
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center mt-[130px] mb-[100px]'>
             <div class="card card-bodys bg-base-100 shadow-xl">
                 <figure class="px-10 pt-10">
                     <img src={partsInfo.image} alt="Shoes" class="rounded-xl imgbd" />
@@ -140,11 +122,8 @@ const Purchase = () => {
                         </div>
 
                         {/* address */}
-
                         <input type="text" required onChange={(e) => setAddress(e.target.value)} name='address' placeholder="Shipping Address" class="input input-bordered w-full max-w-xs" />
                         <input type="number" required onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" class="input input-bordered w-full max-w-xs" />
-
-
 
                         {<input type="submit" value='Purchase' className="btn btn-secondary w-full max-w-xs" />}
                     </div>

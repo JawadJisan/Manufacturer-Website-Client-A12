@@ -15,11 +15,11 @@ const Navbar = ({ children }) => {
   console.log(pathname)
 
   return (
-    <div class='drawer  drawer-end relative' >
+    <div class='drawer  drawer-end ' >
       <input id='my-drawer-3' type='checkbox' class='drawer-toggle' />
       <div class='drawer-content flex flex-col'>
         <div class='w-full navbar bg-blue-200 fixed top-0 z-50 lg:px-20'>
-          {pathname === '/dashboard' && <label for="my-drawer-2" tabindex="0" class="btn btn-ghost btn-circle drawer-button lg:hidden">
+          {<label for="my-drawer-2" tabindex="0" class="btn btn-ghost btn-circle drawer-button lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
             </svg>
           </label>}
@@ -78,8 +78,10 @@ const Navbar = ({ children }) => {
                     </div>
                   </label>
                   <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                    <li>{user && <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>}
+                    <li className="text-center mx-auto ">{user && <button onClick={logout} className="btn btn-active btn-error">Sign Out</button>}
                     </li>
+                    <li className="text-center mx-auto "><a>{user.displayName}  </a></li>
+
                   </ul>
                 </div>
               }

@@ -1,4 +1,6 @@
 .newContainer{
+    margin-top: 350px;
+    margin-bottom: 150px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     /* flex: 6; */

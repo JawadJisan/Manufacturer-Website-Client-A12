@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NotFound.css'
+import imggg from '../../../Images/imggg.jpg'
 
 const NotFound = () => {
     return (
@@ -9,8 +10,8 @@ const NotFound = () => {
         <div>
           <div className='img-404  bg-gray-200 rounded-lg'>
             <img
-              src='404.jpg'
-              alt=''
+              src={imggg}
+              alt='404'
             />
           </div>
         </div>
