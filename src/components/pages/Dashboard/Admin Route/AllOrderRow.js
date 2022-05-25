@@ -52,10 +52,19 @@ const AllOrderRow = ({ order, index, setDeletOrder }) => {
             </td>
             <td>
                 {(order?.price && !order.paid) && <button className='btn btn-xs btn-error'>Unpaid</button>}
-                {(order?.price && order.paid) && <div>
+                {
+                (order?.price && order.paid) && 
+                <div>
                     <button className='btn btn-success btn-sm' onClick={()=> handleShipment(_id)}>Panding</button>
-                    <p> Transaction Id: <span className='text-success'>{order.transactionId} </span></p>
                 </div>}
+                {order?.status && <button className='btn btn-primary'>Shipped</button> }
+                
+                {/* {!order.status && order.paid ? <div>
+                    <button className='btn btn-success btn-sm' onClick={()=> handleShipment(_id)}>Panding</button>
+                </div>:
+                order.status && 
+                <p>Shipped</p> } */}
+                
             </td>
         </tr>
     );
