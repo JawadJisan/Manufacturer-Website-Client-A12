@@ -5,6 +5,7 @@ import BusinessSummery from './BusinessSummery';
 import PartsAll from './PartsAll';
 import Reviews from './Reviews';
 import TopBanner from './TopBanner';
+import UpComing from './UpComing';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <PartsAll/>
             <Reviews/>
             <BusinessSummery/>
+            <UpComing></UpComing>
         </div>
     );
 };
