@@ -13,12 +13,12 @@ const Purchase = () => {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [qty, setQuantity] = useState('');
-    // console.log(qty, 'quantity')
 
     const { partsId } = useParams();
+    
+    
 
-
-
+    
     const url = `http://localhost:5000/part/${partsId}`
     const { data: partsInfo, isLoading } = useQuery(['part', partsId], () => fetch(url, {
         method: 'GET',
@@ -29,12 +29,10 @@ const Purchase = () => {
     if (isLoading) {
         return <ReactSpinner />
     }
-
-    /*  */
-    // let quantit;
-    //     if(quantit == {partsInfo.minOrderQuantity}){
-
-    //     }
+    
+    // const availableQuantity = partsInfo.availableQuantity - qty;
+    // console.log(availableQuantity);
+  
     const handlePurchase = event => {
         event.preventDefault();
         const quantity = event.target.quantity.value;
@@ -52,20 +50,21 @@ const Purchase = () => {
             userName: user?.displayName,
             address, phone, 
             quantity: qty,
+            availableQuantity: partsInfo.availableQuantity - qty,
         }
         // const newOrder = partsInfo.availableQuantity - qty;
         // console.log(newOrder, 'new order')
 
         // if (qty <= partsInfo.minOrderQuantity || qty >= partsInfo.availableQuantity) {
-        if (qty <50 || qty>500 ) {
-            Swal.fire(
-                'Your Purchase Is Compleate !!!!',
-                'You clicked the button!',
-                'error',
-                // 'new item collection =' {partsInfo.availableQuantit}
-            )
-        }
-        else {
+        // if (qty <= partsInfo.minOrderQuantity) {
+        //     Swal.fire(
+        //         'You have to select More then Minimum Quantity And Lower Than Available Quantity',
+        //         'Enter Your Quantity Avove Min Quantity',
+        //         'error',
+        //         // 'new item collection =' {partsInfo.availableQuantit}
+        //     )
+        // }
+        // else {
             fetch('http://localhost:5000/purchase', {
                 method: 'POST',
                 headers: {
@@ -77,32 +76,36 @@ const Purchase = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data) {
+                        console.log(data)
                         Swal.fire(
                             'Your Purchase Is Compleate !',
                             'You clicked the button!',
                             'success',
                         )
-                        console.log(data)
-                        const quantity = partsInfo.availableQuantity - qty;
-                        console.log(quantity, 'new quantity')
-                        // fetch(`http://localhost:5000/part/${partsId}`, {
-                        //     method: 'PATCH',
-                        //     headers: {
-                        //         'content-type': 'application/json',
-                        //         'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                        //     },
-                        //     body: JSON.stringify(quantity)
-                        // }).then(res => res.json()).then(data => {
-                        //     console.log(data, 'not qty updated')
-                        // })
+
+                        /* ------- put new quantity on the Home page */
+
+                            fetch(`http://localhost:5000/changeQty/${partsId}`, {
+                            method: 'PUT',
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                                'content-type':'application/json'
+                            },
+                            body:JSON.stringify(purchase)
+
+                        })
+                            .then(res => res.json())                    
+                            .then(data => console.log(data))
+                        
+                    
                     }
                     else {
                         console.log(data)
                     }
                     // refetch();
                 })
-        }
+        // }
 
 
 
@@ -112,29 +115,28 @@ const Purchase = () => {
 
     return (
         <div className='flex flex-col items-center justify-center'>
-            <div class="card  bg-base-100 shadow-xl">
+            <div class="card card-bodys bg-base-100 shadow-xl">
                 <figure class="px-10 pt-10">
-                    <img src={partsInfo.image} alt="Shoes" class="rounded-xl" />
+                    <img src={partsInfo.image} alt="Shoes" class="rounded-xl imgbd" />
                 </figure>
                 <form onSubmit={handlePurchase}>
                     <div class="card-body items-center text-center">
                         <h2 class="card-title">{partsInfo.name} </h2>
-                        <h3 class="">Min Order: {partsInfo.minOrderQuantity} </h3>
-                        <h3 class="">Available Quantity: {partsInfo.availableQuantity} </h3>
+                        <h3 class="minOrder">Min Order: {partsInfo.minOrderQuantity} </h3>
+                        <h3 class="maxQty">Available Quantity: {partsInfo.availableQuantity} </h3>
 
                         <p>{partsInfo.description} </p>
-                        <h1>Price: $-{partsInfo.price} </h1>
+                        <h1 className='price'>Price: $-{partsInfo.price} </h1>
                         {/* user info */}
-                        <h1>{user?.displayName} </h1>
-                        <h3>{user?.email} </h3>
+                        <h1 className='uName'>{user?.displayName} </h1>
+                        <h3 className='uEmail'>{user?.email} </h3>
 
                         {/* quantity */}
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
-                                <span required class="label-text">QUANTITY</span>
+                                <span required class="label-text font-mono text-2xl">QUANTITY</span>
                             </label>
-                            <input type="number" onChange={(e) => setQuantity(e.target.value)} name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />
-                            <input type="text" value={qty} />
+                            <input required type="number" onChange={(e) => setQuantity(e.target.value)} name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />
                         </div>
 
                         {/* address */}
@@ -148,8 +150,6 @@ const Purchase = () => {
                     </div>
                 </form>
             </div>
-
-            {/* <button onClick={() => handleDelever(partsInfo)} className="btn btn-lg m-3 text-light btn-danger fw-bold"> Delivered</button> */}
         </div>
 
     );

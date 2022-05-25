@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = ({ data }) => {
     const stripe = useStripe();
@@ -93,6 +94,11 @@ const CheckoutForm = ({ data }) => {
             }).then(res => res.json()).then(data => {
                 setSProcessing(false);
                 console.log(data)
+                Swal.fire(
+                    'Congratss',
+                    'Your Payment is Recived Successfully',
+                    'success'
+                )
             })
         }
 

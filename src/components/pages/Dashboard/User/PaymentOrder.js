@@ -31,7 +31,8 @@ const PaymentOrder = () => {
                     <p className="text-success font-bold">Hello, {data.userName}</p>
                     <h2 class="card-title">Please Pay for {data.name}</h2>
                     <p>About<span className='text-orange-700'>{data.description}</span></p>
-                    <p>Please pay: ${data.price}</p>
+                    <p>You Have to pay For {data.quantity} Items</p>
+                    <p>Please pay: ${data.price * data.quantity}</p>
                 </div>
             </div>
             <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">

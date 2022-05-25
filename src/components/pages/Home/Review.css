@@ -1,0 +1,7 @@
+.reviewDiv:hover{
+    background-color: crimson;
+    
+}
+.reviewDiv .reviewName:hover{
+    color: whitesmoke;
+}
