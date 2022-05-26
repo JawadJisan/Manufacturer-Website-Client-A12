@@ -9,7 +9,7 @@ const OrderRow = ({ order, index, setDeletOrder, refetch }) => {
     function archiveFunction(event) {
         Swal.fire({
           title: 'Are you sure?',
-          text: "If You Delet Product will From Your Wallet",
+          text: "If You Delet Product will Remove From Your Wallet",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -17,7 +17,7 @@ const OrderRow = ({ order, index, setDeletOrder, refetch }) => {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`http://localhost:5000/orders/${order._id}`, {
+            fetch(`https://safe-falls-41750.herokuapp.com/orders/${order._id}`, {
                 method: 'DELETE',
               headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

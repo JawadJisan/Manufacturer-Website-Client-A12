@@ -16,7 +16,7 @@ const AddReview = ({ inputs, title }) => {
 
     const onSubmit = async data => {
         const newDoc = { ...data, image: imageUrl }
-        fetch('http://localhost:5000/addReview', {
+        fetch('https://safe-falls-41750.herokuapp.com/addReview', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -13,9 +13,9 @@ const stripePromise = loadStripe('pk_test_51L0l3aDIahaKXnTeiATjHgffljac8OyDTEMyV
 const PaymentOrder = () => {
     const { id } = useParams();
 
-    const url = `http://localhost:5000/purchase/${id}`;
+    const url = `https://safe-falls-41750.herokuapp.com/purchase/${id}`;
 
-    const { data: data, isLoading } = useQuery(['purchase', id], () => fetch(url, {
+    const { data: data, isLoading, refetch } = useQuery(['purchase', id], () => fetch(url, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const PaymentOrder = () => {
             <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
                 <div class="card-body">
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm data={data} />
+                        <CheckoutForm data={data}  refetch={refetch}/>
                     </Elements>
 
                 </div>

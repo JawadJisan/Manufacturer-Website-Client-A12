@@ -4,7 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
 
-const ManageAllTools = ({ tool }) => {
+const ManageAllTools = ({ tool,refetch }) => {
 
   function archiveFunction(event) {
     Swal.fire({
@@ -17,7 +17,7 @@ const ManageAllTools = ({ tool }) => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/tools/${tool._id}`, {
+        fetch(`https://safe-falls-41750.herokuapp.com/tools/${tool._id}`, {
           method: 'DELETE',
           headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -30,6 +30,7 @@ const ManageAllTools = ({ tool }) => {
           'Your file has been deleted.',
           'success'
         )
+        refetch()
       }
     })
   }
@@ -43,7 +44,7 @@ const ManageAllTools = ({ tool }) => {
         <hr className='hr' />
         <p className="Price"> Price : {tool?.price} </p>
         <p className="Qty"> Stocks : {tool?.availableQuantity} </p>
-        <p onClick={() => archiveFunction()} className="Qty"> <span className="btn btn-outline btn-primary btn-sm buttoon"><FaTrashAlt className='iccon' />  Delete Parts</span> </p>
+        <p onClick={() => archiveFunction()} className="Qty"> <span className="btn btn-outline btn-primary btn-sm buttoon"><FaTrashAlt className='iccon' />  Delete Tools</span> </p>
 
 
       </div>

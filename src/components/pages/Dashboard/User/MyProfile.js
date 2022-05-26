@@ -54,7 +54,7 @@ const MyProfile = ({ inputs, title }) => {
         //         }
 
         //     })
-        fetch(`http://localhost:5000/createProfile/${user.email}`, {
+        fetch(`https://safe-falls-41750.herokuapp.com/createProfile/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -71,6 +71,7 @@ const MyProfile = ({ inputs, title }) => {
                         'success'
                     )
                     reset()
+                    refetch()
                 }
                 else {
                     Swal.fire({
@@ -81,7 +82,7 @@ const MyProfile = ({ inputs, title }) => {
                 }
             })
     }
-    const { data: services, isLoading, refetch } = useQuery(['userProfile', user?.email], () => fetch(`http://localhost:5000/userProfile/${user?.email}`, {
+    const { data: services, isLoading, refetch } = useQuery(['userProfile', user?.email], () => fetch(`https://safe-falls-41750.herokuapp.com/userProfile/${user?.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

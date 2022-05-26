@@ -9,7 +9,7 @@ const ManageOrders = () => {
     const [deletOrder, setDeletOrder] = useState(null);
 
     const { data: allPurchases, isLoading, refetch } = useQuery('allPurchases', () =>
-        fetch('http://localhost:5000/allPurchases').then(res =>
+        fetch('https://safe-falls-41750.herokuapp.com/allPurchases').then(res =>
             res.json())
     )
     if (isLoading) {
@@ -18,7 +18,7 @@ const ManageOrders = () => {
 
     
     return (
-        <div className='manage-order manageOrderDiv'>
+        <div className='manage-order manageOrderDiv mb-[100px]'>
             <h2 className='text-2xl text-center'> All Orders: {allPurchases?.length} </h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">

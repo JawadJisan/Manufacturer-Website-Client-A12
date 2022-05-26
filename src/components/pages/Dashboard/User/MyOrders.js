@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
-import { userColumns, userRows } from './dataSource'
 
 import './MyOrders.scss'
 import { signOut } from 'firebase/auth';
@@ -12,7 +11,6 @@ import OrderRow from './OrderRow';
 import DeletConfirmModal from './DeletConfirm';
 
 const MyOrders = () => {
-    const [data, setData] = useState(userRows);
     const [deletOrder, setDeletOrder] = useState(null);
     const [aa, setAA] = useState([]);
     const [user, loading, error] = useAuthState(auth);
@@ -20,7 +18,7 @@ const MyOrders = () => {
     const navigate = useNavigate();
 
     
-    const { data: services, isLoading, refetch } = useQuery(['orders', userEmail], () => fetch(`http://localhost:5000/orders?userEmail=${user?.email}`, {
+    const { data: services, isLoading, refetch } = useQuery(['orders', userEmail], () => fetch(`https://safe-falls-41750.herokuapp.com/orders?userEmail=${user?.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -32,10 +30,7 @@ const MyOrders = () => {
 
 
 
-    const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
-    };
-
+   
 
   
 

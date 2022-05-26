@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
 
-const CheckoutForm = ({ data }) => {
+const CheckoutForm = ({ data, refetch }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [caedError, setCardError] = useState('');
@@ -15,7 +15,7 @@ const CheckoutForm = ({ data }) => {
     console.log(price)
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://safe-falls-41750.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -53,6 +53,7 @@ const CheckoutForm = ({ data }) => {
         setCardError(error?.message || '')
         setSuccess('');
         setSProcessing(true);
+        refetch();
 
 
         // confirm card payment
@@ -78,13 +79,14 @@ const CheckoutForm = ({ data }) => {
             setTransactionId(paymentIntent)
             console.log(paymentIntent.id);
             setSuccess('Cnngreates!@! Your Payment is compleated')
+            refetch();
 
             const payment = {
                 appointment: _id,
                 transactionId: paymentIntent.id,
             }
             // update payment to backend // store payment on database
-            fetch(`http://localhost:5000/purchase/${_id}`, {
+            fetch(`https://safe-falls-41750.herokuapp.com/purchase/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
@@ -99,6 +101,8 @@ const CheckoutForm = ({ data }) => {
                     'Your Payment is Recived Successfully',
                     'success'
                 )
+                window.location.reload()
+                refetch()
             })
         }
 

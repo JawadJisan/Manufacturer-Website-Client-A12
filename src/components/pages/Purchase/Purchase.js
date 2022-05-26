@@ -16,7 +16,7 @@ const Purchase = () => {
 
     const { partsId } = useParams();
 
-    const url = `http://localhost:5000/part/${partsId}`
+    const url = `https://safe-falls-41750.herokuapp.com/part/${partsId}`
     const { data: partsInfo, isLoading, refetch } = useQuery(['part', partsId], () => fetch(url, {
         method: 'GET',
         headers: {
@@ -29,7 +29,14 @@ const Purchase = () => {
     
     // const availableQuantity = partsInfo.availableQuantity - qty;
     // console.log(availableQuantity);
-  
+    
+    // let errors;
+    // errors = <p className='font-bold text-red-800'>Quantity Cannot Be Lase then Minimum Order Quantity</p>
+    // let errorss;
+    // errorss = <p className='font-bold text-red-800'>Quantity Must be Higher Then Available Quantity</p>
+
+    
+
     const handlePurchase = event => {
         event.preventDefault();
         const quantity = event.target.quantity.value;
@@ -56,7 +63,7 @@ const Purchase = () => {
                 text: 'You Have to Select Quantity More the Minimum Quantity ?? and Higher Then Available Quantity',
               })
         }
-            fetch('http://localhost:5000/purchase', {
+            fetch('https://safe-falls-41750.herokuapp.com/purchase', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -71,13 +78,13 @@ const Purchase = () => {
                         console.log(data)
                         Swal.fire(
                             'Your Purchase Is Compleate !',
-                            'You clicked the button!',
+                            'Please Check Your Email for Conformation',
                             'success',
                         )
                     refetch();
 
                         /* ------- put new quantity on the Home page */
-                            fetch(`http://localhost:5000/changeQty/${partsId}`, {
+                            fetch(`https://safe-falls-41750.herokuapp.com/changeQty/${partsId}`, {
                             method: 'PUT',
                             headers: {
                                 authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -119,6 +126,8 @@ const Purchase = () => {
                                 <span required class="label-text font-mono text-2xl">QUANTITY</span>
                             </label>
                             <input required type="number" onChange={(e) => setQuantity(e.target.value)} name='quantity' placeholder={partsInfo.minOrderQuantity} class="input input-bordered w-full max-w-xs" />
+                            {/* {qty && qty <= partsInfo.minOrderQuantity && <p>{errors} </p> }
+                            {qty && qty >= partsInfo.availableQuantity && <p>{errorss} </p> } */}
                         </div>
 
                         {/* address */}

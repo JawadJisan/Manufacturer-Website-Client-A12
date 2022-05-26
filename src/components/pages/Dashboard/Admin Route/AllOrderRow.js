@@ -8,7 +8,7 @@ const AllOrderRow = ({ order, index, setDeletOrder, refetch }) => {
     const { name, image, userEmail, _id } = order;
 
     const handleShipment = id =>{
-        fetch(`http://localhost:5000/changeStatus/${id}`, {
+        fetch(`https://safe-falls-41750.herokuapp.com/changeStatus/${id}`, {
         method: 'PUT',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +51,7 @@ const AllOrderRow = ({ order, index, setDeletOrder, refetch }) => {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-    fetch(`http://localhost:5000/orders/${_id}`, {
+    fetch(`https://safe-falls-41750.herokuapp.com/orders/${_id}`, {
               method: 'DELETE',
               headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

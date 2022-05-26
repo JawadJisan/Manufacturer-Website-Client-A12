@@ -12,8 +12,8 @@ const Footer = () => {
         <div>
             <footer class="footer px-10 py-14 bg-base-200 text-base-content">
                 <div>
-                <Link to='/'><FcShop  className='iconss'/></Link>
-                    <p>RIPARA<br/>ALL TOOLS AND PARTS <br/> SOLUTION IN ENTIRE PLANET</p>
+                    <Link to='/'><FcShop className='iconss' /></Link>
+                    <p>RIPARA<br />ALL TOOLS AND PARTS <br /> SOLUTION IN ENTIRE PLANET</p>
                 </div>
                 <div>
                     <span class="footer-title">Information</span>
@@ -30,7 +30,7 @@ const Footer = () => {
                 </div>
                 <div>
                     <span class="footer-title">Sign Up For Newsletters
-</span>
+                    </span>
                     <div class="form-control w-80">
                         <label class="label">
                             <span class="label-text">Enter your email address</span>
@@ -44,9 +44,9 @@ const Footer = () => {
                 <div>
                     <span class="footer-title">Social</span>
                     <div class="grid grid-flow-col gap-4">
-                       <BsFacebook className='iconnn'/>
-                       <FaTwitter className='iconnn' />
-                       <AiFillYoutube className='iconnn' />
+                        <BsFacebook className='iconnn' />
+                        <FaTwitter className='iconnn' />
+                        <AiFillYoutube className='iconnn' />
 
                     </div>
                 </div>
