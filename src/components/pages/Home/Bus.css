@@ -20,3 +20,26 @@
 .divv{
     background-color: rgb(246, 238, 238);
 }
+.purcheDiv{
+    width: 100%;
+    background-color: rgb(224, 214, 214);
+    /* border: 2px solid slategray; */
+    border-top: none;
+}
+.fullDiv{
+    border: 2px solid slategray;
+    border-bottom: none;
+}
+.titleName{
+    font-size: 25px;
+    font-weight: bold;
+    /* background-color: black; */
+}
+.min{
+    font-size: 22px;
+    color: darkred;
+}
+.max{
+    font-size: 22px;
+    color: darkred;
+}

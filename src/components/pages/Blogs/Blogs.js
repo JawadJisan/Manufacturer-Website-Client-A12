@@ -95,7 +95,9 @@ const Blogs = () => {
                     </li>
                 </ul>
             </div>
-
+            <div>
+          
+            </div>
         </div>
     );
 };

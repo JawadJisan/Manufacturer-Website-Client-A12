@@ -3,7 +3,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import './Review.css'
 
 
-const ReviewInfo = ({review}) => {
+const ReviewInfo = ({ review }) => {
     return (
         <div className='flex flex-col  items-center justify-center'>
             <div class="card w-96 max-h-min reviewDiv bg-base-100 shadow-xl border-red-700 ">
@@ -18,11 +18,19 @@ const ReviewInfo = ({review}) => {
                     <h2 class="card-title reviewName justify-center text-red-900 ">{review.name} </h2>
                     <p className='text-gray-900'>{review.type} </p>
                     <div className='flex items-center text-center justify-center'>
-                    <BsFillStarFill  style={{ color: '#ff922b' }} />
-                    <BsFillStarFill  style={{ color: '#ff922b' }} />
-                    <BsFillStarFill  style={{ color: '#ff922b' }} />
-                    <BsFillStarFill  style={{ color: '#ff922b' }} />
-                    <BsFillStarFill  style={{ color: '#ff922b' }} />
+                        {review?.rating >= 3 ? <>
+                            <BsFillStarFill style={{ color: '#ff922b' }} />
+                            <BsFillStarFill style={{ color: '#ff922b' }} />
+                            <BsFillStarFill style={{ color: '#ff922b' }} />
+                            <BsFillStarFill style={{ color: '#ff922b' }} />
+                            <BsFillStarFill style={{ color: '#ff922b' }} />
+                        </> :
+                            <>
+                                <BsFillStarFill style={{ color: '#ff922b' }} />
+                                <BsFillStarFill style={{ color: '#ff922b' }} />
+                            </>
+
+                        }
                     </div>
                 </div>
             </div>
