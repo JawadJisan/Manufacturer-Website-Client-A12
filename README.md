@@ -21,6 +21,8 @@ https://safe-falls-41750.herokuapp.com/
 
 • Payment Gatway 
 
+• Email Masseging When user buy a Tools
+
 • Add New user 
 
 • User Dashboard

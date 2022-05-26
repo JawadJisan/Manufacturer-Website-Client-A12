@@ -55,3 +55,12 @@
     font-size: 20px;
     border-radius: 20px;
 }
+.imagess{
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 10px;
+}
+.newdiv{
+    background-color: rgb(232, 243, 242);
+}

@@ -18,7 +18,7 @@ const TopBanner = () => {
                 <div class="hero-content grid grid-cols-1 content-between md:grid-cols-2 lg:grid-cols-2 gap-5">
                     <div >
                         <h1 data-aos-duration="2000" data-aos-delay="200"
-                            data-aos="fade-right" class="text-5xl font-bold">GET CAR TOOLS  <br /> FOR AND REPAIRS YOUR CARS </h1>
+                            data-aos="fade-right" class="text-5xl font-bold">GET CAR TOOLS  <br />  AND REPAIRS YOUR CARS </h1>
                         
                             <span class="py-6 max-w-xl">
                                 <h1 className=" text-5xl " >

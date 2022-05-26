@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import Banner from './Banner';
 import BusinessSummery from './BusinessSummery';
 import Footer from './Footer';
+import New from './New';
 import PartsAll from './PartsAll';
 import Reviews from './Reviews';
 import Section from './Section';
@@ -17,6 +18,7 @@ const Home = () => {
             <Reviews/>
             <BusinessSummery/>
             <UpComing></UpComing>
+            <New></New>
             <Section></Section>
             <Footer></Footer>
         </div>

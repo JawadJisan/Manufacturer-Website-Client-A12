@@ -48,11 +48,7 @@ const ManageOrders = () => {
                     </tbody>
                 </table>
             </div>
-            {deletOrder && <DeletConfirmModal 
-            setDeletOrder={setDeletOrder}
-            deletOrder={deletOrder}
-            refetch={refetch}
-            />}
+            
         </div>
     );
 };
