@@ -43,3 +43,15 @@
     font-size: 22px;
     color: darkred;
 }
+.contactBTN{
+    background-color: crimson;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 20px;
+}
+.contactBTN:hover{
+    background-color: rgb(237, 108, 22);
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 20px;
+}

@@ -42,7 +42,7 @@ function App() {
 
           {/* Dashboard */}
           {/* <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}> */}
-          <Route path='/dashboard' element={<RequireAuth><Dashboard/></RequireAuth>}>
+          <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
             <Route path='add-review' element={<AddReview />} />
             {/* <Route index element={<MyOrders/>} /> */}
             <Route path='my-orders' element={<MyOrders />} />
@@ -60,7 +60,7 @@ function App() {
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
       </Navbar>
-        <Footer />
+      {/* <Footer /> */}
 
     </div>
   );
