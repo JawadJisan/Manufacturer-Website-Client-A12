@@ -191,7 +191,6 @@ const Login = () => {
                     <h2>Email: <span>xyz@demo.com</span> </h2>
                     <h2>Password: <span>123456</span> </h2>
                 </div>
-
             </div>
         </>
     );
