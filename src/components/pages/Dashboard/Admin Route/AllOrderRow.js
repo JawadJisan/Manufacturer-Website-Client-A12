@@ -8,7 +8,7 @@ const AllOrderRow = ({ order, index, setDeletOrder, refetch }) => {
     const { name, image, userEmail, _id } = order;
 
     const handleShipment = id =>{
-        fetch(`https://safe-falls-41750.herokuapp.com/changeStatus/${id}`, {
+        fetch(`https://manufacturer-website-werver-a12.onrender.com/changeStatus/${id}`, {
         method: 'PUT',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +51,7 @@ const AllOrderRow = ({ order, index, setDeletOrder, refetch }) => {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-    fetch(`https://safe-falls-41750.herokuapp.com/orders/${_id}`, {
+    fetch(`https://manufacturer-website-werver-a12.onrender.com/orders/${_id}`, {
               method: 'DELETE',
               headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

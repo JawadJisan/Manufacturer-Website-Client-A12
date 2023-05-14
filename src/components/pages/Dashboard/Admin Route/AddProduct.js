@@ -15,7 +15,7 @@ const AddProduct = ({ inputs, title }) => {
 
   const onSubmit = async data => {
     const newDoc = {...data, image:imageUrl}
-    fetch('https://safe-falls-41750.herokuapp.com/addParts',{
+    fetch('https://manufacturer-website-werver-a12.onrender.com/addParts',{
                     method: 'POST',
                     headers:{
                         'content-type':'application/json',

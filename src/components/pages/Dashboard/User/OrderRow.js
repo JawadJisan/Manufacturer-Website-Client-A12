@@ -17,7 +17,7 @@ const OrderRow = ({ order, index, setDeletOrder, refetch }) => {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`https://safe-falls-41750.herokuapp.com/orders/${order._id}`, {
+            fetch(`https://manufacturer-website-werver-a12.onrender.com/orders/${order._id}`, {
                 method: 'DELETE',
               headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

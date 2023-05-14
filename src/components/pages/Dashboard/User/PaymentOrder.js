@@ -13,7 +13,7 @@ const stripePromise = loadStripe('pk_test_51L0l3aDIahaKXnTeiATjHgffljac8OyDTEMyV
 const PaymentOrder = () => {
     const { id } = useParams();
 
-    const url = `https://safe-falls-41750.herokuapp.com/purchase/${id}`;
+    const url = `https://manufacturer-website-werver-a12.onrender.com/purchase/${id}`;
 
     const { data: data, isLoading, refetch } = useQuery(['purchase', id], () => fetch(url, {
         method: 'GET',

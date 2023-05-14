@@ -6,7 +6,7 @@ import './ManageOrder.css'
 
 
 const MakeAdmin = () => {
-    const { data: users, isLoading, refetch } = useQuery(['users'], () => fetch(`https://safe-falls-41750.herokuapp.com/users`, {
+    const { data: users, isLoading, refetch } = useQuery(['users'], () => fetch(`https://manufacturer-website-werver-a12.onrender.com/users`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

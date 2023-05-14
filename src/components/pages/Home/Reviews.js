@@ -11,7 +11,7 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        fetch('https://safe-falls-41750.herokuapp.com/reviews')
+        fetch('https://manufacturer-website-werver-a12.onrender.com/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
 

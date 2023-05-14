@@ -7,7 +7,7 @@ const useAdmin = user =>{
         const email = user?.email;
         console.log(email);
         if(email){
-            fetch(`https://safe-falls-41750.herokuapp.com/admin/${email}`, {
+            fetch(`https://manufacturer-website-werver-a12.onrender.com/admin/${email}`, {
             method:'GET',
             headers:{
                 'content-type': 'application/json',

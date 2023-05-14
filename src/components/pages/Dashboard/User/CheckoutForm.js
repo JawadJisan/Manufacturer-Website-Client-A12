@@ -15,7 +15,7 @@ const CheckoutForm = ({ data, refetch }) => {
     console.log(price)
 
     useEffect(() => {
-        fetch('https://safe-falls-41750.herokuapp.com/create-payment-intent', {
+        fetch('https://manufacturer-website-werver-a12.onrender.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -86,7 +86,7 @@ const CheckoutForm = ({ data, refetch }) => {
                 transactionId: paymentIntent.id,
             }
             // update payment to backend // store payment on database
-            fetch(`https://safe-falls-41750.herokuapp.com/purchase/${_id}`, {
+            fetch(`https://manufacturer-website-werver-a12.onrender.com/purchase/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

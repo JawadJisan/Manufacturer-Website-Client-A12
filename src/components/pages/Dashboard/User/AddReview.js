@@ -16,7 +16,7 @@ const AddReview = ({ inputs, title }) => {
 
     const onSubmit = async data => {
         const newDoc = { ...data, image: imageUrl }
-        fetch('https://safe-falls-41750.herokuapp.com/addReview', {
+        fetch('https://manufacturer-website-werver-a12.onrender.com/addReview', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

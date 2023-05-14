@@ -5,7 +5,7 @@ import ManageAllTools from './ManageAllTools';
 import './ManageTools.css'
 
 const ManageProducts = () => {
-    const { data: tools, isLoading, refetch } = useQuery('allParts', () => fetch(`https://safe-falls-41750.herokuapp.com/allParts`, {
+    const { data: tools, isLoading, refetch } = useQuery('allParts', () => fetch(`https://manufacturer-website-werver-a12.onrender.com/allParts`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
